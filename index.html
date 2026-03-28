@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Yining Wen | Ph.D. Candidate</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Source+Sans+3:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    :root {
+      --bg:#f9f7f4; --white:#ffffff; --ink:#1c1917; --ink2:#44403c;
+      --ink3:#78716c; --ink4:#a8a29e; --border:#e7e5e4;
+      --blue:#1d4ed8; --blue-light:#eff6ff; --red:#b91c1c;
+      --serif:'Lora',Georgia,serif;
+      --sans:'Source Sans 3',system-ui,sans-serif;
+      --mono:'JetBrains Mono',monospace;
+    }
+    body { background:var(--bg); color:var(--ink); font-family:var(--sans); font-size:15px; line-height:1.75; }
+    a { color:var(--blue); text-decoration:none; }
+    a:hover { text-decoration:underline; }
+
+    /* Page */
+    .page { max-width:1050px; margin:0 auto; padding:48px 32px 80px; }
+
+    /* Name header */
+    .page-name { font-family:var(--serif); font-size:30px; font-weight:600; color:var(--ink); margin-bottom:6px; }
+    hr.divider { border:none; border-top:1px solid var(--border); margin:10px 0 24px; }
+
+    /* Intro block */
+    .intro { display:flex; gap:36px; align-items:flex-start; margin-bottom:40px; }
+    .intro-photo img { width:180px; height:180px; object-fit:cover; border:1px solid var(--border); display:block; }
+    .intro-info { flex:1; padding-top:4px; }
+    .intro-title { font-size:14.5px; color:var(--ink2); margin-bottom:4px; }
+    .intro-email { font-size:14px; color:var(--ink2); margin-bottom:10px; }
+    .intro-email span { font-style:italic; }
+    .intro-links { font-size:14px; }
+    .intro-links a { color:var(--red); }
+    .intro-links a:hover { text-decoration:underline; }
+    .intro-links .sep { color:var(--ink4); margin:0 5px; }
+
+    /* About */
+    .about-section { margin-bottom:32px; }
+    .sec-title { font-family:var(--serif); font-size:18px; font-weight:600; color:var(--red); margin-bottom:6px; }
+    hr.sec-divider { border:none; border-top:1px solid var(--border); margin-bottom:16px; }
+    .about-section p { color:var(--ink2); font-size:15px; line-height:1.85; margin-bottom:10px; }
+    .about-section p strong { color:var(--ink); font-weight:600; }
+    .tags { display:flex; flex-wrap:wrap; gap:7px; margin-top:14px; }
+    .tag { font-size:12px; font-family:var(--mono); background:var(--blue-light); color:var(--blue); padding:3px 11px; border-radius:20px; border:1px solid #bfdbfe; }
+
+    /* Horizontal Tabs */
+    .tab-bar {
+      display:flex; gap:0; border-bottom:2px solid var(--border);
+      margin-bottom:28px;
+    }
+    .tab-btn {
+      font-family:var(--serif); font-size:16px; font-weight:500;
+      color:var(--ink3); background:none; border:none; cursor:pointer;
+      padding:10px 22px; border-bottom:2px solid transparent;
+      margin-bottom:-2px; transition:color .15s, border-color .15s;
+    }
+    .tab-btn:hover { color:var(--ink); }
+    .tab-btn.active { color:var(--ink); border-bottom-color:var(--ink); }
+
+    /* Tab panels */
+    .tab-panel { display:none; }
+    .tab-panel.active { display:block; }
+
+    /* Accordion */
+    details.accordion { margin-bottom:10px; border:1px solid var(--border); border-radius:8px; background:var(--white); }
+    details.accordion summary {
+      list-style:none; cursor:pointer; padding:13px 18px;
+      font-family:var(--serif); font-size:15px; font-weight:500; color:var(--ink);
+      display:flex; align-items:center; justify-content:space-between;
+      user-select:none;
+    }
+    details.accordion summary::-webkit-details-marker { display:none; }
+    details.accordion summary::after { content:'＋'; font-size:16px; color:var(--ink4); }
+    details.accordion[open] summary::after { content:'－'; }
+    details.accordion[open] summary { border-bottom:1px solid var(--border); }
+    details.accordion .accordion-body { padding:16px 18px; }
+
+    /* News */
+    .news-list { display:flex; flex-direction:column; }
+    .news-item { display:flex; gap:18px; padding:10px 0; border-bottom:1px solid var(--border); align-items:flex-start; }
+    .news-item:first-child { border-top:1px solid var(--border); }
+    .news-date { font-family:var(--mono); font-size:11.5px; color:var(--ink4); min-width:64px; padding-top:2px; flex-shrink:0; }
+    .news-body { font-size:14px; color:var(--ink2); line-height:1.6; }
+    .news-body strong { color:var(--ink); font-weight:600; }
+    .badge { display:inline-block; font-size:10.5px; font-family:var(--mono); padding:1px 0; border-radius:4px; margin-right:4px; font-weight:500; vertical-align:middle; min-width:52px; text-align:center; }
+    .b-paper { background:#fef9c3; color:#854d0e; border:1px solid #fde68a; }
+    .b-talk  { background:#dcfce7; color:#166534; border:1px solid #bbf7d0; }
+    .b-award { background:#fce7f3; color:#9d174d; border:1px solid #fbcfe8; }
+    .b-news  { background:var(--blue-light); color:var(--blue); border:1px solid #bfdbfe; }
+
+    /* Publications */
+    .pub-list { display:flex; flex-direction:column; gap:16px; }
+    .pub-item {
+      display:flex; gap:20px; padding:18px 20px;
+      background:var(--white); border:1px solid var(--border);
+      border-radius:8px; border-left:3px solid var(--blue);
+      transition:box-shadow .2s, transform .2s;
+    }
+    .pub-item:hover { box-shadow:0 4px 18px rgba(0,0,0,.07); transform:translateY(-1px); }
+    .pub-thumb {
+      width:140px; flex-shrink:0; border-radius:5px; overflow:hidden;
+      background:var(--blue-light); display:flex; align-items:center;
+      justify-content:center; font-size:28px; height:100px;
+    }
+    .pub-thumb img { width:100%; height:100%; object-fit:cover; border-radius:4px; }
+    .pub-body { flex:1; min-width:0; }
+    .pub-title { font-family:var(--serif); font-size:16px; font-weight:500; color:var(--ink); line-height:1.4; margin-bottom:5px; }
+    .pub-authors { font-size:13.5px; color:var(--ink3); margin-bottom:4px; }
+    .pub-authors .me { color:var(--ink); font-weight:600; text-decoration:underline; }
+    .pub-venue { font-size:13px; color:var(--ink3); font-style:italic; margin-bottom:10px; }
+    .pub-venue .conf { color:var(--red); font-style:normal; font-weight:600; }
+    .pub-links { display:flex; flex-wrap:wrap; gap:6px; }
+    .pbtn { font-family:var(--mono); font-size:11px; color:var(--blue); border:1px solid var(--blue); padding:2px 9px; border-radius:4px; transition:all .15s; text-decoration:none; }
+    .pbtn:hover { background:var(--blue); color:#fff; text-decoration:none; }
+    .pbtn.code { color:#059669; border-color:#059669; }
+    .pbtn.code:hover { background:#059669; color:#fff; }
+
+    /* Experience & Education */
+    .list { display:flex; flex-direction:column; }
+    .item { display:flex; gap:16px; padding:16px 0; border-bottom:1px solid var(--border); }
+    .item:first-child { border-top:1px solid var(--border); }
+    .logo { width:44px; height:44px; flex-shrink:0; border-radius:8px; border:1px solid var(--border); background:var(--white); display:flex; align-items:center; justify-content:center; font-size:20px; overflow:hidden; }
+    .logo img { width:100%; height:100%; object-fit:contain; padding:4px; }
+    .ibody { flex:1; }
+    .ihead { display:flex; justify-content:space-between; align-items:flex-start; gap:12px; margin-bottom:2px; }
+    .irole { font-family:var(--serif); font-size:16px; font-weight:500; color:var(--ink); }
+    .iperiod { font-family:var(--mono); font-size:11.5px; color:var(--ink4); white-space:nowrap; padding-top:3px; }
+    .iorg { font-size:13.5px; color:var(--blue); margin-bottom:5px; }
+    .idesc { font-size:13.5px; color:var(--ink2); line-height:1.65; }
+
+    footer { text-align:center; font-size:12px; color:var(--ink4); font-family:var(--mono); padding-top:32px; border-top:1px solid var(--border); margin-top:48px; }
+
+    @media(max-width:640px) {
+      .intro { flex-direction:column; }
+      .intro-photo img { width:140px; height:140px; }
+      .tab-btn { padding:8px 12px; font-size:14px; }
+      .pub-thumb { display:none; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Name heading -->
+  <div class="page-name">Yining Wen (温一宁)</div>
+  <hr class="divider">
+
+  <!-- Intro: photo + links -->
+  <div class="intro">
+    <div class="intro-photo">
+      <img src="head2.jpg" alt="Yining Wen">
+    </div>
+    <div class="intro-info">
+      <div class="intro-title">Ph.D. Candidate, Civil, Construction and Environmental Engineering</div>
+      <div class="intro-title" style="margin-bottom:8px;">The University of Alabama</div>
+      <div class="intro-email">E-mail: <span>ywen11@crimson.ua.edu</span></div>
+      <div class="intro-links">
+        <a href="https://github.com/Yining-Wen" target="_blank">Github</a>
+        <span class="sep">|</span>
+        <a href="https://scholar.google.com/citations?user=SsvykR0AAAAJ&hl=en" target="_blank">Google Scholar</a>
+        <span class="sep">|</span>
+        <a href="https://www.linkedin.com/in/yining-wen-837921177" target="_blank">LinkedIn</a>
+        <span class="sep">|</span>
+        <a href="YW26_physical_ai.pdf" target="_blank">CV</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <div class="about-section">
+    <div class="sec-title">About Me</div>
+    <hr class="sec-divider">
+    <p>
+      Welcome to my channel! I am currently a Civil Engineering Ph.D. candidate at
+      <strong>The University of Alabama</strong>, where I am advised by
+      <a href="#">Dr. Kaiwen Chen</a>. I am also pursuing ECE M.S. degree supervised by
+      <a href="#">Dr. Shunqiao Sun</a>.
+    </p>
+    <p>
+      My research focuses on <strong>multimodal perception</strong>, <strong>digital twins</strong>, and <strong>robotic inspection systems</strong> for the built environment, with an emphasis on language-guided control, scene reconstruction, and 3D spatial reasoning. I am particularly interested in applying these approaches to robotic inspection, physical simulation for energy analysis, and edge autonomy.
+    </p>
+  </div>
+
+  <!-- HORIZONTAL TAB BAR -->
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTab('publications', this)">Publications</button>
+    <button class="tab-btn" onclick="switchTab('news', this)">News</button>
+    <button class="tab-btn" onclick="switchTab('education', this)">Education</button>
+  </div>
+
+  <!-- TAB: NEWS -->
+  <div id="tab-news" class="tab-panel">
+    <div class="news-list">
+      <div class="news-item">
+        <div class="news-date">2026.03</div>
+        <div class="news-body"><span class="badge b-paper">Paper</span> One paper presented at <strong>CRC 2026</strong>.</div>
+      </div>
+      <div class="news-item">
+        <div class="news-date">2025.08</div>
+        <div class="news-body"><span class="badge b-news">News</span> Ph.D. proposal defense success!</div>
+      </div>
+      <div class="news-item">
+        <div class="news-date">2025.05</div>
+        <div class="news-body"><span class="badge b-paper">Paper</span> One paper presented at <strong>CIB 2025</strong>.</div>
+      </div>
+      <div class="news-item">
+        <div class="news-date">2025.04</div>
+        <div class="news-body"><span class="badge b-award">Award</span> 1st Place at <strong>ECE Research Poster Competition</strong>.</div>
+      </div>
+      <div class="news-item">
+        <div class="news-date">2025.01</div>
+        <div class="news-body"><span class="badge b-news">News</span> Attended <strong>CAAA Annual Meeting</strong>.</div>
+      </div>
+      <div class="news-item">
+        <div class="news-date">2024.05</div>
+        <div class="news-body"><span class="badge b-award">Award</span> Runner-Up in the <strong>5th Annual ASCE VIMS Datathon Competition</strong>.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB: PUBLICATIONS -->
+  <div id="tab-publications" class="tab-panel active">
+    <p style="font-size:13px;color:var(--ink3);margin-bottom:14px;">
+      (<a href="https://scholar.google.com/citations?user=SsvykR0AAAAJ&hl=en">Full list on Google Scholar</a>)
+    </p>
+    <div class="pub-list">
+
+      <div class="pub-item" style="flex-direction:column;">
+        <div class="pub-body" style="width:100%;">
+          <div class="pub-title">Employing GPT and NeRF for Intelligent Robotic-Controlled Building Envelope Inspections</div>
+          <div class="pub-authors">AG Lonbar, <span class="me">Y Wen</span>, K Chen, H He</div>
+          <div class="pub-venue"><span class="conf">Construction Research Congress 2025</span>, CON-378-1</div>
+          <div class="pub-links"></div>
+        </div>
+        <div style="display:flex;flex-direction:row;gap:6px;margin-top:2px;">
+          <img src="media2-ezgif.com-video-to-gif-converter.gif" alt="demo 2" style="width:200px;height:140px;object-fit:cover;border-radius:5px;border:1px solid var(--border);">
+          <img src="media1-ezgif.com-video-to-gif-converter.gif" alt="demo 1" style="width:200px;height:140px;object-fit:cover;border-radius:5px;border:1px solid var(--border);">
+          <img src="media3-ezgif.com-video-to-gif-converter.gif" alt="demo 3" style="width:200px;height:140px;object-fit:cover;border-radius:5px;border:1px solid var(--border);">
+        </div>
+      </div>
+
+
+      <div class="pub-item">
+        <div class="pub-body">
+          <div class="pub-title">Natural Language Navigation for Robotic Systems: Integrating GPT and Dense Captioning Models with Object Detection in Autonomous Inspections</div>
+          <div class="pub-authors">NR Choudhury, <span class="me">Y Wen</span>, K Chen</div>
+          <div class="pub-venue"><span class="conf">Construction Research Congress 2024</span>, 972–980</div>
+          <div class="pub-links"></div>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-body">
+          <div class="pub-title">Autonomous Detection and Assessment of Indoor Building Defects Using Multimodal Learning and GPT</div>
+          <div class="pub-authors"><span class="me">Y Wen</span>, K Chen</div>
+          <div class="pub-venue"><span class="conf">Construction Research Congress 2024</span>, 1001–1009</div>
+          <div class="pub-links"></div>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-body">
+          <div class="pub-title">Scenario-Adaptive Building Defect Inspection by Active Learning</div>
+          <div class="pub-authors"><span class="me">Y Wen</span>, K Chen, J Bao</div>
+          <div class="pub-venue">
+            <span class="conf">Computing in Civil Engineering 2024</span>, 315–323
+          </div>
+          <div class="pub-links">
+          </div>
+        </div>
+      </div>
+
+      <div class="pub-item" style="flex-direction:column;">
+        <div class="pub-body" style="width:100%;">
+          <div class="pub-title">An Intelligent Robotic Sensing System for Indoor Building System Inspection</div>
+          <div class="pub-authors"><span class="me">Y Wen</span>, K Chen, NR Choudhury</div>
+          <div class="pub-venue">
+            <span class="conf">Computing in Civil Engineering 2023</span>, 690–698
+          </div>
+          <div class="pub-links"></div>
+        </div>
+        <div style="display:flex;flex-direction:row;gap:6px;margin-top:2px;">
+          <img src="image25-ezgif.com-speed.gif" alt="demo 1" style="width:200px;height:140px;object-fit:cover;border-radius:5px;border:1px solid var(--border);">
+          <img src="image24-ezgif.com-speed.gif" alt="demo 2" style="width:200px;height:140px;object-fit:cover;border-radius:5px;border:1px solid var(--border);">
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-body">
+          <div class="pub-title">Fast Forward-Backward Hankel Matrix Completion for Automotive Radar DoA Estimation Using Sparse Linear Arrays</div>
+          <div class="pub-authors">S Sun, <span class="me">Y Wen</span>, R Wu, D Ren, J Li</div>
+          <div class="pub-venue">
+            <span class="conf">IEEE RadarConf 2023</span>, 01–06
+          </div>
+          <div class="pub-links">
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- TAB: EDUCATION -->
+  <div id="tab-education" class="tab-panel">
+    <div class="list">
+
+      <div class="item">
+        <div class="ibody">
+          <div class="ihead">
+            <div class="irole">The University of Alabama</div>
+            <div class="iperiod">Aug. 2021 – Expected Aug. 2026</div>
+          </div>
+          <div class="iorg">Tuscaloosa, USA</div>
+          <div class="idesc">Ph.D. in Civil, Construction and Environmental Engineering</div>
+          <div class="idesc">Master of Science in Electrical and Computer Engineering</div>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="ibody">
+          <div class="ihead">
+            <div class="irole">New York University</div>
+            <div class="iperiod">Aug. 2018 – May 2020</div>
+          </div>
+          <div class="iorg">New York, USA</div>
+          <div class="idesc">Master of Science in Mechanical Engineering</div>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="ibody">
+          <div class="ihead">
+            <div class="irole">Beihang University</div>
+            <div class="iperiod">Aug. 2014 – May 2018</div>
+          </div>
+          <div class="iorg">Beijing, China</div>
+          <div class="idesc">Bachelor of Engineering in Aeronautic Science and Engineering</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+</div>
+
+<script>
+  function switchTab(name, btn) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    btn.classList.add('active');
+  }
+</script>
+</body>
+</html>
